@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="splash" class="splash-screen" aria-live="polite">
+      <div class="splash-logo">Login</div>
+      <div class="splash-spinner" aria-hidden="true"></div>
+    </div>
     <div class="container">
       <div class="center">
           <h1>Login</h1>
@@ -29,5 +33,20 @@
           </form>
       </div>
     </div>
+    <script>
+      window.addEventListener('load', function () {
+        var splash = document.getElementById('splash');
+        if (!splash) { return; }
+        // Small delay so the animation is visible even on fast loads
+        setTimeout(function () {
+          splash.classList.add('splash--hide');
+          splash.addEventListener('transitionend', function () {
+            if (splash && splash.parentNode) {
+              splash.parentNode.removeChild(splash);
+            }
+          }, { once: true });
+        }, 900);
+      });
+    </script>
   </body>
 </html>
